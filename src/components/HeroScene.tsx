@@ -1,5 +1,5 @@
 import { useRef, useMemo, useCallback } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 function FloatingParticles({ count = 300, mouse }: { count?: number; mouse: React.MutableRefObject<{ x: number; y: number }> }) {
