@@ -5,28 +5,41 @@
 }
 
 :root {
-  --color-primary: #1a3a4a;
-  --color-primary-light: #2a5a6a;
-  --color-accent: #c8956c;
-  --color-accent-light: #e0b08a;
-  --color-bg: #faf8f5;
-  --color-bg-alt: #f0ece6;
-  --color-text: #2d2d2d;
-  --color-text-light: #6b6b6b;
+  --color-primary: #0f2b3c;
+  --color-primary-mid: #1a4460;
+  --color-primary-light: #2a6080;
+  --color-accent: #d4a373;
+  --color-accent-hover: #e0b992;
+  --color-accent-dark: #b8855a;
+  --color-bg: #fdfbf8;
+  --color-bg-alt: #f5f0ea;
+  --color-bg-warm: #faf5ef;
+  --color-text: #1e1e1e;
+  --color-text-mid: #4a4a4a;
+  --color-text-light: #7a7a7a;
   --color-white: #ffffff;
+  --color-divider: #e8e0d6;
   --font-heading: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.07);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.1);
+  --shadow-glow: 0 8px 40px rgba(212,163,115,0.25);
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-bg);
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -39,15 +52,21 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-white);
 }

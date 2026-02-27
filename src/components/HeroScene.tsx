@@ -1,52 +1,57 @@
-import { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRef, useMemo, useCallback } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-function FloatingParticles({ count = 200 }) {
+function FloatingParticles({ count = 300, mouse }: { count?: number; mouse: React.MutableRefObject<{ x: number; y: number }> }) {
   const mesh = useRef<THREE.Points>(null)
 
-  const particles = useMemo(() => {
+  const { positions, basePositions, speeds } = useMemo(() => {
     const positions = new Float32Array(count * 3)
-    const sizes = new Float32Array(count)
+    const basePositions = new Float32Array(count * 3)
+    const speeds = new Float32Array(count)
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 20
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10
-      sizes[i] = Math.random() * 3 + 1
+      const theta = Math.random() * Math.PI * 2
+      const phi = Math.acos(2 * Math.random() - 1)
+      const r = 3 + Math.random() * 8
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta)
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta)
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 6
+      basePositions[i * 3] = positions[i * 3]
+      basePositions[i * 3 + 1] = positions[i * 3 + 1]
+      basePositions[i * 3 + 2] = positions[i * 3 + 2]
+      speeds[i] = 0.2 + Math.random() * 0.8
     }
-    return { positions, sizes }
+    return { positions, basePositions, speeds }
   }, [count])
 
   useFrame((state) => {
     if (!mesh.current) return
     const time = state.clock.elapsedTime
-    mesh.current.rotation.y = time * 0.02
-    mesh.current.rotation.x = Math.sin(time * 0.01) * 0.1
+    const mx = mouse.current.x * 0.5
+    const my = mouse.current.y * 0.5
     const posArray = mesh.current.geometry.attributes.position.array as Float32Array
     for (let i = 0; i < count; i++) {
       const i3 = i * 3
-      posArray[i3 + 1] += Math.sin(time * 0.5 + i * 0.1) * 0.002
+      const speed = speeds[i]
+      posArray[i3] = basePositions[i3] + Math.sin(time * 0.3 * speed + i) * 0.4 + mx * 0.3
+      posArray[i3 + 1] = basePositions[i3 + 1] + Math.cos(time * 0.2 * speed + i * 0.5) * 0.4 + my * 0.3
+      posArray[i3 + 2] = basePositions[i3 + 2] + Math.sin(time * 0.15 * speed + i * 0.3) * 0.3
     }
     mesh.current.geometry.attributes.position.needsUpdate = true
+    mesh.current.rotation.y = time * 0.015 + mx * 0.1
+    mesh.current.rotation.x = my * 0.1
   })
 
   return (
     <points ref={mesh}>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[particles.positions, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-size"
-          args={[particles.sizes, 1]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        color="#c8956c"
-        size={0.06}
+        color="#d4a373"
+        size={0.045}
         transparent
-        opacity={0.6}
+        opacity={0.7}
         sizeAttenuation
         blending={THREE.AdditiveBlending}
         depthWrite={false}
@@ -55,48 +60,50 @@ function FloatingParticles({ count = 200 }) {
   )
 }
 
-function GlowingSphere() {
+function CoreSphere({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) {
   const mesh = useRef<THREE.Mesh>(null)
 
   useFrame((state) => {
     if (!mesh.current) return
     const time = state.clock.elapsedTime
-    mesh.current.scale.setScalar(1 + Math.sin(time * 0.8) * 0.05)
-    mesh.current.rotation.y = time * 0.1
+    mesh.current.rotation.x = time * 0.08 + mouse.current.y * 0.2
+    mesh.current.rotation.y = time * 0.12 + mouse.current.x * 0.2
+    mesh.current.scale.setScalar(1 + Math.sin(time * 0.6) * 0.04)
   })
 
   return (
-    <mesh ref={mesh} position={[0, 0, -3]}>
-      <icosahedronGeometry args={[2.5, 1]} />
+    <mesh ref={mesh} position={[0, 0, -1]}>
+      <icosahedronGeometry args={[2.2, 2]} />
       <meshBasicMaterial
-        color="#2a5a6a"
+        color="#4a90a8"
         wireframe
         transparent
-        opacity={0.15}
+        opacity={0.08}
       />
     </mesh>
   )
 }
 
-function FloatingRings() {
+function OrbitalRings({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) {
   const group = useRef<THREE.Group>(null)
 
   useFrame((state) => {
     if (!group.current) return
     const time = state.clock.elapsedTime
-    group.current.rotation.z = time * 0.05
-    group.current.rotation.x = Math.sin(time * 0.3) * 0.2
+    group.current.rotation.z = time * 0.03
+    group.current.rotation.x = 0.4 + Math.sin(time * 0.2) * 0.1 + mouse.current.y * 0.15
+    group.current.rotation.y = mouse.current.x * 0.15
   })
 
   return (
-    <group ref={group} position={[0, 0, -2]}>
-      {[1.8, 2.4, 3.0].map((radius, i) => (
-        <mesh key={i} rotation={[Math.PI * 0.3 * i, 0, 0]}>
-          <torusGeometry args={[radius, 0.01, 16, 100]} />
+    <group ref={group} position={[0, 0, -1]}>
+      {[2.0, 2.8, 3.6].map((radius, i) => (
+        <mesh key={i} rotation={[Math.PI * 0.2 * i, Math.PI * 0.15 * i, 0]}>
+          <torusGeometry args={[radius, 0.008, 16, 120]} />
           <meshBasicMaterial
-            color="#c8956c"
+            color={i === 1 ? '#d4a373' : '#6ab0c8'}
             transparent
-            opacity={0.2 - i * 0.05}
+            opacity={0.18 - i * 0.04}
           />
         </mesh>
       ))}
@@ -104,16 +111,54 @@ function FloatingRings() {
   )
 }
 
-export default function HeroScene() {
+function InnerGlow() {
+  const mesh = useRef<THREE.Mesh>(null)
+
+  useFrame((state) => {
+    if (!mesh.current) return
+    const time = state.clock.elapsedTime
+    mesh.current.scale.setScalar(1 + Math.sin(time * 0.4) * 0.15)
+    const mat = mesh.current.material as THREE.MeshBasicMaterial
+    mat.opacity = 0.03 + Math.sin(time * 0.5) * 0.015
+  })
+
   return (
-    <Canvas
-      camera={{ position: [0, 0, 6], fov: 60 }}
-      style={{ background: 'transparent' }}
-      gl={{ alpha: true, antialias: true }}
-    >
-      <FloatingParticles />
-      <GlowingSphere />
-      <FloatingRings />
-    </Canvas>
+    <mesh ref={mesh} position={[0, 0, -2]}>
+      <sphereGeometry args={[1.5, 32, 32]} />
+      <meshBasicMaterial color="#d4a373" transparent opacity={0.04} />
+    </mesh>
+  )
+}
+
+function Scene({ mouse }: { mouse: React.MutableRefObject<{ x: number; y: number }> }) {
+  return (
+    <>
+      <FloatingParticles mouse={mouse} />
+      <CoreSphere mouse={mouse} />
+      <OrbitalRings mouse={mouse} />
+      <InnerGlow />
+    </>
+  )
+}
+
+export default function HeroScene() {
+  const mouse = useRef({ x: 0, y: 0 })
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
+    mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1
+  }, [])
+
+  return (
+    <div onMouseMove={handleMouseMove} style={{ width: '100%', height: '100%' }}>
+      <Canvas
+        camera={{ position: [0, 0, 7], fov: 55 }}
+        style={{ background: 'transparent' }}
+        gl={{ alpha: true, antialias: true }}
+        dpr={[1, 1.5]}
+      >
+        <Scene mouse={mouse} />
+      </Canvas>
+    </div>
   )
 }
