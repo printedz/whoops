@@ -51,30 +51,30 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 const PLACEHOLDER_PROJECTS = [
   {
     id: 1,
-    name: 'Projeto Placeholder',
-    location: 'Lisboa, Portugal',
-    type: 'Residencial',
-    status: 'Em desenvolvimento',
+    name: '???',
+    location: 'The Sunken Parish',
+    type: 'Region',
+    status: 'Sealed',
     units: '--',
-    area: '-- m\u00B2',
+    area: '??',
   },
   {
     id: 2,
-    name: 'Projeto Placeholder',
-    location: 'Porto, Portugal',
-    type: 'Misto',
-    status: 'Em planeamento',
+    name: '???',
+    location: 'The Velvet Corridor',
+    type: 'Region',
+    status: 'Sealed',
     units: '--',
-    area: '-- m\u00B2',
+    area: '??',
   },
   {
     id: 3,
-    name: 'Projeto Placeholder',
-    location: 'Algarve, Portugal',
-    type: 'Resort & Residencial',
-    status: 'Brevemente',
+    name: '???',
+    location: 'The Last Garden',
+    type: 'Region',
+    status: 'Sealed',
     units: '--',
-    area: '-- m\u00B2',
+    area: '??',
   },
 ]
 
@@ -98,8 +98,8 @@ function App() {
       {/* Navbar */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <a className="navbar-logo" onClick={() => scrollTo('inicio')}>
-          <span className="navbar-logo-accent">Torres</span> del Imperio
-          <span className="navbar-logo-sub">Portugal</span>
+          <span className="navbar-logo-accent">Magdalena</span>
+          <span className="navbar-logo-sub">A world that remembers</span>
         </a>
         <button className="navbar-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
           <span className={menuOpen ? 'open' : ''} />
@@ -107,12 +107,12 @@ function App() {
           <span className={menuOpen ? 'open' : ''} />
         </button>
         <ul className={`navbar-links ${menuOpen ? 'open' : ''}`}>
-          <li><a onClick={() => scrollTo('inicio')}>Inicio</a></li>
-          <li><a onClick={() => scrollTo('nosotros')}>Nosotros</a></li>
-          <li><a onClick={() => scrollTo('proyectos')}>Proyectos</a></li>
-          <li><a onClick={() => scrollTo('servicios')}>Servicios</a></li>
-          <li><a onClick={() => scrollTo('vision')}>Visión</a></li>
-          <li><a onClick={() => scrollTo('contacto')} className="navbar-cta">Contacto</a></li>
+          <li><a onClick={() => scrollTo('inicio')}>Home</a></li>
+          <li><a onClick={() => scrollTo('nosotros')}>The World</a></li>
+          <li><a onClick={() => scrollTo('proyectos')}>Regions</a></li>
+          <li><a onClick={() => scrollTo('servicios')}>Pillars</a></li>
+          <li><a onClick={() => scrollTo('vision')}>Lore</a></li>
+          <li><a onClick={() => scrollTo('contacto')} className="navbar-cta">Wishlist</a></li>
         </ul>
       </nav>
 
@@ -123,50 +123,50 @@ function App() {
         </div>
         <div className="hero-overlay" />
         <div className="hero-content">
-          <div className="hero-badge">Filial de Torres del Imperio Hispania</div>
+          <div className="hero-badge">An indie RPG experience</div>
           <h1>
-            <span className="hero-line1">Torres del Imperio</span>
-            <span className="hero-line2">Portugal</span>
+            <span className="hero-line1">Magdalena</span>
+            <span className="hero-line2">She never forgot. Neither will you.</span>
           </h1>
           <div className="hero-divider" />
           <p className="hero-subtitle">
-            Proyectos inmobiliarios de excelencia en el mercado portugués
+            Every choice leaves a scar. Every silence hides a truth.
           </p>
           <a className="hero-cta" onClick={() => scrollTo('proyectos')}>
-            <span>Descubre nuestros proyectos</span>
+            <span>Enter the world</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
         <div className="hero-scroll" onClick={() => scrollTo('nosotros')}>
           <div className="hero-scroll-line" />
-          <span>Descubre más</span>
+          <span>Descend</span>
         </div>
       </section>
 
       {/* Stats bar */}
       <section className="stats-bar">
-        <StatCounter value={15} suffix="+" label="Años de experiencia" />
+        <StatCounter value={7} suffix="" label="Fractured regions" />
         <div className="stats-divider" />
-        <StatCounter value={3} suffix="" label="Países" />
+        <StatCounter value={100} suffix="+" label="Hours of lore" />
         <div className="stats-divider" />
-        <StatCounter value={50} suffix="+" label="Proyectos realizados" />
+        <StatCounter value={3} suffix="" label="Endings you won't expect" />
         <div className="stats-divider" />
-        <StatCounter value={2000} suffix="+" label="Unidades entregadas" />
+        <StatCounter value={1} suffix="" label="Chance to get it right" />
       </section>
 
       {/* Nosotros */}
       <section className="section" id="nosotros">
         <div className="section-inner">
           <FadeInSection>
-            <div className="section-label">Quiénes somos</div>
-            <h2 className="section-title">Nosotros</h2>
+            <div className="section-label">What lies beneath</div>
+            <h2 className="section-title">The World</h2>
             <div className="title-accent" />
           </FadeInSection>
           <div className="about-container">
             <FadeInSection delay={100}>
               <div className="about-image-wrapper">
                 <div className="about-image">
-                  <img src={logoTIP} alt="Torres del Imperio Portugal" className="about-logo" />
+                  <img src={logoTIP} alt="Magdalena" className="about-logo" />
                 </div>
                 <div className="about-image-ring" />
                 <div className="about-image-dots" />
@@ -174,22 +174,20 @@ function App() {
             </FadeInSection>
             <FadeInSection delay={250}>
               <div className="about-text">
-                <h3><span className="text-accent">Torres del Imperio Portugal</span></h3>
+                <h3><span className="text-accent">A world built on memory</span></h3>
                 <p>
-                  Somos la filial portuguesa del grupo Torres del Imperio Hispania,
-                  una promotora inmobiliaria de referencia en la Península Ibérica.
-                  Desarrollamos proyectos residenciales, comerciales y mixtos que
-                  combinan diseño contemporáneo con calidad constructiva de primer nivel.
+                  Magdalena is set in a place that shouldn't exist anymore.
+                  A place shaped by what its inhabitants chose to remember — and
+                  what they were forced to forget. You arrive with nothing.
+                  The world already knows your name.
                 </p>
                 <p>
-                  Nuestra presencia en Portugal responde a la visión de expansión
-                  estratégica del grupo, aportando al mercado portugués la experiencia
-                  y el rigor que nos caracterizan.
+                  We can't tell you more. Not yet.
                 </p>
                 <div className="about-tags">
-                  <span className="about-tag">Grupo Torres del Imperio</span>
-                  <span className="about-tag">Promotora Inmobiliaria</span>
-                  <span className="about-tag">Península Ibérica</span>
+                  <span className="about-tag">Indie RPG</span>
+                  <span className="about-tag">Narrative-driven</span>
+                  <span className="about-tag">Choice matters</span>
                 </div>
               </div>
             </FadeInSection>
@@ -201,11 +199,11 @@ function App() {
       <section className="section section-alt" id="proyectos">
         <div className="section-inner">
           <FadeInSection>
-            <div className="section-label">Portfolio</div>
-            <h2 className="section-title">Proyectos</h2>
+            <div className="section-label">Uncharted</div>
+            <h2 className="section-title">Regions</h2>
             <div className="title-accent" />
             <p className="section-subtitle">
-              Próximamente compartiremos los detalles de nuestros desarrollos en Portugal
+              Seven regions. Each one remembers something different. None of them remember you.
             </p>
           </FadeInSection>
           <div className="projects-grid">
@@ -213,7 +211,7 @@ function App() {
               <FadeInSection key={project.id} delay={idx * 150}>
                 <div className="project-card">
                   <div className="project-image">
-                    <img src={logoTIP} alt="Torres del Imperio Portugal" className="project-logo" />
+                    <img src={logoTIP} alt="Magdalena" className="project-logo" />
                     <div className="project-status">{project.status}</div>
                   </div>
                   <div className="project-info">
@@ -225,11 +223,11 @@ function App() {
                     </div>
                     <div className="project-details">
                       <div className="project-detail">
-                        <span className="project-detail-label">Unidades</span>
+                        <span className="project-detail-label">Secrets</span>
                         <span className="project-detail-value">{project.units}</span>
                       </div>
                       <div className="project-detail">
-                        <span className="project-detail-label">Superficie</span>
+                        <span className="project-detail-label">Threat</span>
                         <span className="project-detail-value">{project.area}</span>
                       </div>
                     </div>
@@ -243,7 +241,7 @@ function App() {
               <div className="projects-coming-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </div>
-              <p>Más proyectos en preparación. Información detallada próximamente.</p>
+              <p>More regions will be revealed. Some are better left forgotten.</p>
             </div>
           </FadeInSection>
         </div>
@@ -253,11 +251,11 @@ function App() {
       <section className="section" id="servicios">
         <div className="section-inner">
           <FadeInSection>
-            <div className="section-label">Lo que hacemos</div>
-            <h2 className="section-title">Servicios</h2>
+            <div className="section-label">What defines Magdalena</div>
+            <h2 className="section-title">Pillars</h2>
             <div className="title-accent" />
             <p className="section-subtitle">
-              Desarrollo inmobiliario integral, desde la concepción hasta la entrega
+              Three things you should know before you step inside
             </p>
           </FadeInSection>
           <div className="services-grid">
@@ -273,14 +271,14 @@ function App() {
                     <line x1="0" y1="42" x2="48" y2="42"/>
                   </svg>
                 </div>
-                <h3>Promoción Residencial</h3>
+                <h3>Consequence</h3>
                 <p>
-                  Desarrollo de proyectos residenciales de alta calidad,
-                  desde apartamentos urbanos hasta complejos residenciales
-                  en las mejores ubicaciones de Portugal.
+                  Nothing is forgiven. The world shifts around the weight
+                  of what you've done. NPCs remember. The land remembers.
+                  There is no reloading your way out.
                 </p>
                 <a className="service-link" onClick={() => scrollTo('contacto')}>
-                  Saber más <span>&rarr;</span>
+                  Learn more <span>&rarr;</span>
                 </a>
               </div>
             </FadeInSection>
@@ -298,14 +296,14 @@ function App() {
                     <circle cx="33" cy="4" r="2"/>
                   </svg>
                 </div>
-                <h3>Proyectos Mixtos</h3>
+                <h3>Atmosphere</h3>
                 <p>
-                  Desarrollo de complejos que integran uso residencial,
-                  comercial y de servicios, creando comunidades vibrantes
-                  y autosuficientes.
+                  Hand-painted environments. A soundtrack that follows
+                  you home. Every room tells a story if you're paying
+                  attention. Most players won't be.
                 </p>
                 <a className="service-link" onClick={() => scrollTo('contacto')}>
-                  Saber más <span>&rarr;</span>
+                  Learn more <span>&rarr;</span>
                 </a>
               </div>
             </FadeInSection>
@@ -324,14 +322,14 @@ function App() {
                     <path d="M10.1 37.9l5.66-5.66M32.24 15.76l5.66-5.66"/>
                   </svg>
                 </div>
-                <h3>Gestión Integral</h3>
+                <h3>The Unknown</h3>
                 <p>
-                  Acompañamiento completo del ciclo inmobiliario:
-                  adquisición de suelo, licenciamiento, construcción,
-                  comercialización y postventa.
+                  There's a third pillar. We're not ready
+                  to talk about it yet. You'll understand
+                  why when you play.
                 </p>
                 <a className="service-link" onClick={() => scrollTo('contacto')}>
-                  Saber más <span>&rarr;</span>
+                  Learn more <span>&rarr;</span>
                 </a>
               </div>
             </FadeInSection>
@@ -347,42 +345,42 @@ function App() {
         <div className="philosophy-overlay" />
         <FadeInSection>
           <div className="philosophy-content">
-            <div className="section-label section-label-light">Nuestra esencia</div>
-            <h2>Nuestra Visión</h2>
+            <div className="section-label section-label-light">From the archives</div>
+            <h2>Lore Fragment</h2>
             <div className="title-accent title-accent-light" />
             <blockquote className="philosophy-quote">
-              "Creamos espacios que transforman ciudades y mejoran la vida de las personas.
-              Cada proyecto es una oportunidad para dejar una huella de calidad
-              y excelencia en el paisaje urbano portugués."
+              "She built the town from a single memory. When they asked her which one,
+              she smiled and said: 'The one that hurt the most.'
+              No one asked again."
             </blockquote>
             <p className="philosophy-text">
-              Respaldados por la solidez y trayectoria de Torres del Imperio Hispania,
-              llevamos al mercado portugués una visión innovadora del desarrollo inmobiliario.
+              — Recovered from a journal found beneath the Chapel of Still Water.
+              Author unknown. Pages 1 through 47 are missing.
             </p>
             <div className="philosophy-values">
               <div className="philosophy-value">
                 <div className="pv-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
-                <span>Excelencia</span>
+                <span>Memory</span>
               </div>
               <div className="philosophy-value">
                 <div className="pv-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span>Solidez</span>
+                <span>Guilt</span>
               </div>
               <div className="philosophy-value">
                 <div className="pv-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
                 </div>
-                <span>Innovación</span>
+                <span>Light</span>
               </div>
               <div className="philosophy-value">
                 <div className="pv-icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
                 </div>
-                <span>Visión Global</span>
+                <span>[ REDACTED ]</span>
               </div>
             </div>
           </div>
@@ -396,16 +394,15 @@ function App() {
             <div className="testimonial-block">
               <div className="testimonial-mark">"</div>
               <p className="testimonial-text">
-                La expansión a Portugal representa un paso estratégico para
-                Torres del Imperio Hispania. El mercado inmobiliario portugués
-                ofrece oportunidades excepcionales y estamos comprometidos
-                con aportar nuestra experiencia y estándares de calidad.
+                I played the demo at 2 AM. I finished it at 6 AM.
+                I haven't stopped thinking about the ending.
+                I don't think the ending has stopped thinking about me.
               </p>
               <div className="testimonial-author">
-                <img src={logoTIP} alt="TI" className="testimonial-avatar-img" />
+                <img src={logoTIP} alt="Playtester" className="testimonial-avatar-img" />
                 <div>
-                  <div className="testimonial-name">Torres del Imperio Hispania</div>
-                  <div className="testimonial-role">Grupo Matriz</div>
+                  <div className="testimonial-name">Anonymous Playtester</div>
+                  <div className="testimonial-role">"I need to play it again."</div>
                 </div>
               </div>
             </div>
@@ -417,40 +414,40 @@ function App() {
       <section className="section section-alt" id="contacto">
         <div className="section-inner">
           <FadeInSection>
-            <div className="section-label">Hablemos</div>
-            <h2 className="section-title">Contacto</h2>
+            <div className="section-label">Don't miss it</div>
+            <h2 className="section-title">Stay Close</h2>
             <div className="title-accent" />
             <p className="section-subtitle">
-              Consulte nuestros proyectos o explore oportunidades de inversión
+              Wishlist now. The world is almost ready for you.
             </p>
           </FadeInSection>
           <FadeInSection delay={150}>
             <div className="contact-container">
               <div className="contact-cards">
-                <a className="contact-card" href="mailto:info@torresdelimperio.pt">
+                <a className="contact-card" href="#">
                   <div className="contact-card-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
                   </div>
-                  <div className="contact-card-label">Email</div>
-                  <div className="contact-card-value">info@torresdelimperio.pt</div>
+                  <div className="contact-card-label">Steam</div>
+                  <div className="contact-card-value">Wishlist on Steam</div>
                 </a>
-                <a className="contact-card" href="tel:+351000000000">
+                <a className="contact-card" href="#">
                   <div className="contact-card-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                   </div>
-                  <div className="contact-card-label">Teléfono</div>
-                  <div className="contact-card-value">+351 000 000 000</div>
+                  <div className="contact-card-label">Discord</div>
+                  <div className="contact-card-value">Join the community</div>
                 </a>
                 <div className="contact-card">
                   <div className="contact-card-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   </div>
-                  <div className="contact-card-label">Sede</div>
-                  <div className="contact-card-value">Lisboa, Portugal</div>
+                  <div className="contact-card-label">Release</div>
+                  <div className="contact-card-value">When it's ready.</div>
                 </div>
               </div>
-              <a className="contact-main-cta" href="mailto:info@torresdelimperio.pt">
-                <span>Solicitar información</span>
+              <a className="contact-main-cta" href="#">
+                <span>Wishlist on Steam</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
@@ -462,17 +459,17 @@ function App() {
       <footer className="footer">
         <div className="footer-inner">
           <div className="footer-brand">
-            <span className="footer-logo">Torres del Imperio Portugal</span>
-            <p>Filial de Torres del Imperio Hispania</p>
+            <span className="footer-logo">Magdalena</span>
+            <p>A world that remembers</p>
           </div>
           <div className="footer-links">
-            <a onClick={() => scrollTo('nosotros')}>Nosotros</a>
-            <a onClick={() => scrollTo('proyectos')}>Proyectos</a>
-            <a onClick={() => scrollTo('servicios')}>Servicios</a>
-            <a onClick={() => scrollTo('contacto')}>Contacto</a>
+            <a onClick={() => scrollTo('nosotros')}>The World</a>
+            <a onClick={() => scrollTo('proyectos')}>Regions</a>
+            <a onClick={() => scrollTo('servicios')}>Pillars</a>
+            <a onClick={() => scrollTo('contacto')}>Wishlist</a>
           </div>
           <div className="footer-copy">
-            &copy; {new Date().getFullYear()} Torres del Imperio Portugal &mdash; Todos los derechos reservados
+            &copy; {new Date().getFullYear()} Magdalena &mdash; All rights reserved
           </div>
         </div>
       </footer>
